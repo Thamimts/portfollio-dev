@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Personal Portfolio</title>
+    <link rel="icon" type="image/x-icon" href="/img/favi.png" />
+    <link rel="stylesheet" href="por.css" />
+    <script src="por.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a class="logo" href="/">dev<span>.</span>folio</a>
+        <ul class="nav-links">
+          <li><a href="#about">about</a></li>
+          <li><a href="#projects">projects</a></li>
+          <li><a href="#skills">skills</a></li>
+          <li><a href="#contact">contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="app">
+      <section class="hero" aria-labelledby="hero-heading">
+        <div class="hero-text">
+          <p class="tag">Available for freelance and full-time work</p>
+          <h1 id="hero-heading">Hi, I'm <span class="hl">THAMIM</span>.<br />Full-Stack Dev.</h1>
+          <p>I build clean, scalable web apps with polished interfaces, solid APIs, and mobile-first detail. The goal is always the same: make the product feel fast, clear, and premium.</p>
+          <div class="btns">
+            <button class="btn-primary">View Projects</button>
+            <button class="btn-sec">Download CV</button>
+          </div>
+          <div class="hero-points" aria-label="Highlights">
+            <span class="hero-point">Frontend systems</span>
+            <span class="hero-point">Node.js APIs</span>
+            <span class="hero-point">Responsive UI</span>
+          </div>
+        </div>
+
+        <aside class="hero-visual" aria-hidden="true">
+          <div class="visual-orb visual-orb-a"></div>
+          <div class="visual-orb visual-orb-b"></div>
+          <div class="dashboard-shell">
+            <div class="dashboard-top">
+              <span class="dashboard-live"></span>
+              <span>Design system overview</span>
+              <span class="dashboard-chip">SaaS-ready</span>
+            </div>
+
+            <div class="dashboard-metric dashboard-metric-primary">
+              <span>Launch velocity</span>
+              <strong>Fast iteration</strong>
+              <small>UI, API, and feedback loops kept tight.</small>
+            </div>
+
+            <div class="dashboard-grid">
+              <div class="dashboard-card">
+                <span>UX polish</span>
+                <strong>Premium</strong>
+              </div>
+              <div class="dashboard-card">
+                <span>Backend</span>
+                <strong>Reliable</strong>
+              </div>
+              <div class="dashboard-card dashboard-card-wide">
+                <span>Stack</span>
+                <strong>React, Node, MongoDB</strong>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="stats" aria-label="Key statistics">
+        <ul class="stats-list">
+          <li class="stat">
+            <span class="stat-num">3+</span>
+            <span class="stat-label">Projects</span>
+          </li>
+          <li class="stat">
+            <span class="stat-num">1yr</span>
+            <span class="stat-label">Experience</span>
+          </li>
+          <li class="stat">
+            <span class="stat-num">24/7</span>
+            <span class="stat-label">Happy Clients</span>
+          </li>
+        </ul>
+      </section>
+
+      <section id="skills" aria-labelledby="skills-heading">
+        <h2 id="skills-heading" class="section-title">Tech Stack</h2>
+        <ul class="skills-grid">
+          <!-- <li><button class="skill hot" type="button">React</button></li> -->
+          <li><button class="skill hot" type="button">Html</button></li>
+          <li><button class="skill hot" type="button">Css</button></li>
+          <li><button class="skill hot" type="button">JavaScript</button></li>
+          <li><button class="skill hot" type="button">Node.js</button></li>
+          <li><button class="skill hot" type="button">MongoDB</button></li>
+          <li><button class="skill hot" type="button">Express</button></li>
+          <!-- <li><button class="skill" type="button">Tailwind CSS</button></li> -->
+          <!-- <li><button class="skill" type="button">TypeScript</button></li> -->
+          <li><button class="skill" type="button">REST APIs</button></li>
+          <li><button class="skill" type="button">Git</button></li>
+          <li><button class="skill" type="button">GitHub</button></li>
+          <li><button class="skill" type="button">Vercel</button></li>
+          <li><button class="skill" type="button">Netlify</button></li>
+        </ul>
+      </section>
+
+      <section id="projects" aria-labelledby="projects-heading">
+        <h2 id="projects-heading" class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+          <article class="card">
+            <div class="card-icon" style="background:rgba(124,106,247,0.15)">🛒</div>
+            <h3>E-Commerce App</h3>
+            <p>Full-stack store with cart, auth, and Stripe payments.</p>
+            <ul class="card-tags">
+              <li class="card-tag">Html</li>
+              <li class="card-tag">Css</li>
+              <li class="card-tag">JavaScript</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="card-icon" style="background:rgba(106,247,196,0.12)">💬</div>
+            <!-- <h3>Real-Time Chat</h3>
+            <p>Socket.io powered messaging with rooms and auth.</p> -->
+            <h3>Quiz app</h3>
+            <p>Quiz app with timer, scoring, and multiple categories.</p>
+            <ul class="card-tags">
+              <li class="card-tag">Html</li>
+              <li class="card-tag">Css</li>
+              <li class="card-tag">JavaScript</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="card-icon" style="background:rgba(247,196,106,0.12)">📊</div>
+            <h3>Weather App</h3>
+            <p>Real-time weather information with accurate Temperature and  Weather conditions.</p>
+            <ul class="card-tags">
+              <li class="card-tag">Html</li>
+              <li class="card-tag">Css</li>
+              <li class="card-tag">JavaScript</li>
+              <li class="card-tag">Node.js</li>
+              <li class="card-tag">OpenWeather API</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="contact-section" aria-labelledby="contact-heading">
+        <div class="contact-copy">
+          <h2 id="contact-heading">Let's work together ✦</h2>
+          <p>Open to roles, freelance projects, and collaborations. Send a message and it will be saved to the backend database.</p>
+        </div>
+
+        <form id="contactForm" class="contact-form" novalidate>
+          <div class="field-group">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Your Name" autocomplete="name" required />
+          </div>
+
+          <div class="field-group">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="Your Email" autocomplete="email" required />
+          </div>
+
+          <div class="field-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+          </div>
+
+          <button class="contact-submit" type="submit">Send Message</button>
+          <p id="status" class="form-status" aria-live="polite"></p>
+        </form>
+
+        <nav class="social-links" aria-label="Social links">
+          <button class="social-btn">GitHub</button>
+          <button class="social-btn">LinkedIn</button>
+          <button class="social-btn">Email Me</button>
+        </nav>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; <span id="year">2026</span> Thamim — All rights reserved.</p>
+    </footer>
+  </body>
+</html>

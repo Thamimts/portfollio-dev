@@ -1,0 +1,29 @@
+name: Node CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install backend deps
+        working-directory: backend
+        run: npm ci
+      - name: Start server in background and smoke test
+        working-directory: backend
+        run: |
+          node server.js &
+          SERV_PID=$!
+          # wait for server to start
+          n=0; until curl -sSf http://localhost:5000/api/health || [ $n -ge 10 ]; do n=$((n+1)); sleep 1; done
+          curl -sSf http://localhost:5000/api/health
+          kill $SERV_PID || true
