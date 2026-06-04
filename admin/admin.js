@@ -10,7 +10,7 @@
 */
 
 document.addEventListener('DOMContentLoaded', () => {
-  const apiBaseUrl = 'http://localhost:5000';
+  const apiBaseUrl = window.location.origin;
 
   // ---------------------- State & Elements ----------------------
   const state = {
