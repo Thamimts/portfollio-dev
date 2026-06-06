@@ -114,7 +114,8 @@ app.get('/admin', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-	res.sendFile(path.join(frontendDir, 'por.html'));
+	// Serve the main frontend page for local development.
+	res.sendFile(path.join(frontendDir, 'index.html'));
 });
 
 app.get('/api/health', (req, res) => {
