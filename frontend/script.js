@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      window.location.href = 'mailto:thamim7206email@example.com?subject=Portfolio%20Inquiry';
+      window.location.href = 'mailto:thamim7206@gmail.com?subject=Portfolio%20Inquiry';
     });
   });
 
