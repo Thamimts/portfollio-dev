@@ -149,6 +149,8 @@ app.post('/api/contact', async (req, res) => {
 		createdAt: new Date(),
 	};
 
+	console.log('[v0] POST /api/contact - New message received:', { name, email });
+
 	if (!process.env.DISCORD_WEBHOOK_URL) {
 		return res.status(500).json({
 			success: false,
@@ -200,13 +202,18 @@ app.post('/api/contact', async (req, res) => {
 	}
 
 	contactMessages.push(entry);
+	console.log('[v0] Message stored in memory. Total in-memory messages:', contactMessages.length);
 
 	if (messagesCollection) {
 		try {
-			await messagesCollection.insertOne(entry);
+			console.log('[v0] Attempting to save to MongoDB...');
+			const result = await messagesCollection.insertOne(entry);
+			console.log('[v0] MongoDB save successful. Document ID:', result.insertedId);
 		} catch (error) {
-			console.error('MongoDB save failed:', error.message);
+			console.error('[v0] MongoDB save failed:', error.message);
 		}
+	} else {
+		console.log('[v0] MongoDB not connected. Message saved to memory only.');
 	}
 
 	return res.status(201).json({
@@ -221,23 +228,28 @@ app.get('/api/messages', async (req, res) => {
 	// If the server didn't connect to Mongo at startup (or was disconnected),
 	// attempt an on-demand connection so the admin UI can still load live data.
 	if (!messagesCollection) {
+		console.log('[v0] GET /api/messages - MongoDB not connected. Attempting reconnection...');
 		try {
 			await connectMongo();
 		} catch (err) {
 			// connectMongo logs details; fall back to in-memory messages below
 		}
 		if (!messagesCollection) {
+			console.log('[v0] MongoDB reconnection failed. Returning in-memory messages. Count:', contactMessages.length);
 			return res.json(contactMessages.slice().sort(sortByNewest));
 		}
 	}
 
 	try {
+		console.log('[v0] Fetching messages from MongoDB...');
 		const messages = await messagesCollection.find({}).sort({ createdAt: -1 }).toArray();
+		console.log('[v0] MongoDB fetch successful. Message count:', messages.length);
 		return res.json(messages);
 	} catch (error) {
-		console.error('MongoDB read failed:', error && error.message ? error.message : error);
+		console.error('[v0] MongoDB read failed:', error && error.message ? error.message : error);
 		// If a read fails, clear messagesCollection so future calls will retry connectMongo.
 		messagesCollection = null;
+		console.log('[v0] Falling back to in-memory messages. Count:', contactMessages.length);
 		return res.json(contactMessages.slice().sort(sortByNewest));
 	}
 });
@@ -285,11 +297,13 @@ async function connectMongo()
 	const mongoUri = buildMongoUri();
 
 	if (!mongoUri) {
-		console.log('MongoDB connection details not set — skipping MongoDB connection.');
+		console.log('[v0] MongoDB connection details not set — skipping MongoDB connection.');
+		console.log('[v0] Set MONGO_URI or MONGO_USERNAME/MONGO_PASSWORD/MONGO_CLUSTER in .env to enable MongoDB.');
 		return;
 	}
 
 	try {
+		console.log('[v0] Attempting MongoDB connection...');
 		mongoClient = new MongoClient(mongoUri, {
 			serverApi: {
 				version: ServerApiVersion.v1,
@@ -301,11 +315,13 @@ async function connectMongo()
 		await mongoClient.connect();
 		const dbName = process.env.MONGO_DB_NAME || 'portfolio';
 		messagesCollection = mongoClient.db(dbName).collection('messages');
-		console.log(`MongoDB connected to database: ${dbName}`);
+		console.log(`[v0] ✓ MongoDB connected to database: ${dbName}`);
+		console.log('[v0] Messages collection is ready for storage.');
 	} catch (err) {
 		messagesCollection = null;
-		console.warn('MongoDB connection failed:', err && err.message ? err.message : err);
-		console.warn('Continuing without MongoDB. Set a valid MONGO_URI in .env to enable persistence.');
+		console.warn('[v0] ✗ MongoDB connection failed:', err && err.message ? err.message : err);
+		console.warn('[v0] Continuing without MongoDB. Messages will only be stored in memory.');
+		console.warn('[v0] Set a valid MONGO_URI in .env to enable persistence.');
 		try {
 			if (mongoClient) await mongoClient.close();
 		} catch (closeErr) {
